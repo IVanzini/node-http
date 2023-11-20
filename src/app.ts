@@ -28,6 +28,18 @@ const reqList = (req: IncomingMessage, res: ServerResponse) => {
                 res.write(html.replace("{{name}}", nome ?? "pippo"));
                 res.end();
                 break;
+            case "/mario":
+                const mario = {
+                    nome: "Mario",
+                    cognome: "Verdi"
+                }
+                res.writeHead(200, {"Content-type": "application/json"});
+                res.end(JSON.stringify(mario, null, 2));
+                break;
+            case "/ng":
+                res.writeHead(200, {"Content-type": "text/html"});
+                res.end(readFileSync("./templates/index.html", { encoding: "utf8"} ));
+                break;
             default:
                 res.writeHead(404);
                 res.end("Pagina non trovata");
